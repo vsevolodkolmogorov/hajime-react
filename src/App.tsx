@@ -17,8 +17,6 @@ function App() {
     return (
         <div>
             <MyHeader />
-            <Link to={'/'}>Product list</Link>
-            <Link to={'/form'}>Form</Link>
             <Routes>
                 <Route index element={<ProductList/>} />
                 <Route path={'/form'} element={<Form/>} />
