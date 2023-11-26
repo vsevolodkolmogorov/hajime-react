@@ -1,20 +1,20 @@
 import './App.css'
 import {useEffect} from "react";
 import MyHeader from "./components/Header/MyHeader.tsx";
-// @ts-ignore
-const tg =  window.Telegram.WebApp;
+import {useTelegram} from "./hooks/useTelegram.ts";
+
 function App() {
+    const {tg, onToggleButton} = useTelegram();
 
     useEffect(() => {
         tg.ready();
     }, [])
 
-
-
     return (
         <div>
             <MyHeader />
             Work
+            <button onClick={onToggleButton}>toggle</button>
         </div>
     )
 }

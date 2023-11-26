@@ -1,13 +1,9 @@
 import React from 'react';
 import MyButton from "../Button/MyButton.tsx";
+import {useTelegram} from "../../hooks/useTelegram.ts";
 
 const MyHeader: React.FC = () => {
-    // @ts-ignore
-    const tg =  window.Telegram.WebApp;
-    const onClose = () => {
-        console.log("закрыл")
-        tg.close();
-    }
+    const {user, onClose} = useTelegram();
 
     return (
         <div className={'header'}>
@@ -15,7 +11,7 @@ const MyHeader: React.FC = () => {
                 Закрыть
             </MyButton>
             <span className={'username'}>
-                {tg.initDataUnsafe?.user?.username}
+                {user?.username}
             </span>
         </div>
     )
