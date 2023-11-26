@@ -1,6 +1,7 @@
 import React from 'react';
 import MyButton from "../Button/MyButton.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
+import './Header.css'
 
 const MyHeader: React.FC = () => {
     const {user, onClose} = useTelegram();
