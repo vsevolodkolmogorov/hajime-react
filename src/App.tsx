@@ -20,8 +20,8 @@ function App() {
             <Link to={'/'}>Product list</Link>
             <Link to={'/form'}>Form</Link>
             <Routes>
-                <Route path={'/form'} element={<ProductList/>} />
-                <Route index element={<Form/>} />
+                <Route index element={<ProductList/>} />
+                <Route path={'/form'} element={<Form/>} />
             </Routes>
         </div>
     )
