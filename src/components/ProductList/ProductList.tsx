@@ -39,7 +39,8 @@ const ProductList = () => {
          await fetch('http://185.237.253.173:8080/basket', {
              method: 'POST',
              headers: {
-                 'Content-Type': 'application/json;charset=utf-8'
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json'
              },
              body: JSON.stringify(data)
          });
