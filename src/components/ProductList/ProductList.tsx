@@ -36,7 +36,7 @@ const ProductList = () => {
             queryId: queryId,
         };
 
-         await fetch('http://185.237.253.173:8080/basket', {
+         await fetch('http://185.237.253.173:8000/basket', {
              method: 'POST',
              headers: {
                  'Accept': 'application/json',
