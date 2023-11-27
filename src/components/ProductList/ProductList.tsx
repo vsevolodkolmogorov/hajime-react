@@ -27,26 +27,29 @@ const getTotalPrice = (items: IProduct[]) => {
 
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState<IProduct[]>([]);
-    const [isSend, setIsSend] = useState(false);
     const {tg, queryId} = useTelegram();
 
     const onSendData = useCallback(() => {
         const data = {
             products: addedItems,
             totalPrice: getTotalPrice(addedItems),
-            queryId: queryId,
-        };
+            queryId,
+        }
+        fetch('http://85.119.146.179:8000/web-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+    }, [addedItems])
 
-        axios.post('http://185.237.253.173:8000', {data})
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        setIsSend(true);
-    }, [addedItems]);
+    useEffect(() => {
+        tg.onEvent('mainButtonClicked', onSendData)
+        return () => {
+            tg.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [onSendData])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -81,7 +84,6 @@ const ProductList = () => {
 
     return (
         <div className={'list'}>
-            <h1>STATUS SEND: {isSend ? "ДА" : "НЕТ"}</h1>
             {
                 products.map(item => (
                     <ProductItem
