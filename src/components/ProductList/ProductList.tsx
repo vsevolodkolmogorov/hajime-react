@@ -41,6 +41,7 @@ const ProductList = () => {
             },
             body: JSON.stringify(data)
         })
+
     }, []);
 
     useEffect(() => {
