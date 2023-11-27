@@ -26,6 +26,7 @@ const getTotalPrice = (items:IProduct[]) => {
 
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState<IProduct[]>([]);
+    const [isSend, setIsSend] = useState(false);
     const {tg, queryId} = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -42,6 +43,8 @@ const ProductList = () => {
             },
             body: JSON.stringify(data)
         }).then();
+
+        setIsSend(true);
     }, [addedItems]);
 
     useEffect(() => {
@@ -77,6 +80,7 @@ const ProductList = () => {
     
     return (
         <div className={'list'}>
+            <h1>STATUS SEND: {isSend ? "НЕТ" : "ДА"}</h1>
             {
                 products.map(item => (
                     <ProductItem
