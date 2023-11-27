@@ -36,7 +36,7 @@ const ProductList = () => {
             queryId: queryId,
         };
 
-        fetch('http://185.237.253.173:8080', {
+        fetch('http://185.237.253.173:8080/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -80,7 +80,14 @@ const ProductList = () => {
     
     return (
         <div className={'list'}>
-            <h1>STATUS SEND: {isSend ? "НЕТ" : "ДА"}</h1>
+            <h1>STATUS SEND: {isSend ? "ДА" : "НЕТ"}</h1>
+            {
+                isSend && (
+                    addedItems.map(item => (
+                        <p>{item.title}</p>
+                    ))
+                )
+            }
             {
                 products.map(item => (
                     <ProductItem
