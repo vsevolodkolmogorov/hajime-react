@@ -37,7 +37,7 @@ const ProductList = () => {
             queryId: queryId,
         };
 
-        axios.post('http://185.237.253.173:8000/basket', {data})
+        axios.post('http://185.237.253.173:8000', {data})
             .then(function (response) {
                 console.log(response);
             })
