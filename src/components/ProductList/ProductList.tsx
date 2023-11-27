@@ -26,7 +26,7 @@ const getTotalPrice = (items:IProduct[]) => {
 
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState<IProduct[]>([]);
-    const [isSend, setIsSend] = useState('');
+    const [isSend, setIsSend] = useState(false);
     const {tg, queryId} = useTelegram();
 
     const onSendData = useCallback(async ()  => {
@@ -36,16 +36,15 @@ const ProductList = () => {
             queryId: queryId,
         };
 
-        const response = await fetch('http://185.237.253.173:8080/basket', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(data)
-        });
+         await fetch('http://185.237.253.173:8080/basket', {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json;charset=utf-8'
+             },
+             body: JSON.stringify(data)
+         });
 
-        const result = await response.json();
-        setIsSend(result.message);
+        setIsSend(true);
     }, [addedItems]);
 
     useEffect(() => {
@@ -81,7 +80,7 @@ const ProductList = () => {
     
     return (
         <div className={'list'}>
-            <h1>STATUS SEND: {isSend.length !== 0 ? isSend : "НЕТ"}</h1>
+            <h1>STATUS SEND: {isSend ? "ДА" : "НЕТ"}</h1>
             {
                 products.map(item => (
                     <ProductItem
