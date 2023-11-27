@@ -32,16 +32,15 @@ const ProductList = () => {
         const data = {
             products: addedItems,
             totalPrice: getTotalPrice(addedItems),
-            queryId,
+            queryId: queryId,
         }
         fetch('http://185.237.253.173:8080/web-data', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
-
     }, []);
 
     useEffect(() => {
