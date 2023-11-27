@@ -48,10 +48,10 @@ const ProductList = () => {
     }, [addedItems]);
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData);
+        tg.onEvent('mainButtonClicked', () => setIsSend(true));
 
         return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
+            tg.offEvent('mainButtonClicked', () => setIsSend(false))
         }
     }, [onSendData])
     
@@ -81,13 +81,6 @@ const ProductList = () => {
     return (
         <div className={'list'}>
             <h1>STATUS SEND: {isSend ? "ДА" : "НЕТ"}</h1>
-            {
-                isSend && (
-                    addedItems.map(item => (
-                        <p>{item.title}</p>
-                    ))
-                )
-            }
             {
                 products.map(item => (
                     <ProductItem
