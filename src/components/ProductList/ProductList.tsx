@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import './ProductList.css'
 import ProductItem from "../ProductItem/ProductItem.tsx";
 import {useTelegram} from "../../hooks/useTelegram.ts";
+import axios from "axios";
 
 export interface IProduct {
     id: string,
@@ -18,7 +19,7 @@ const products = [
     {id: '5', title: 'Шарф', price: 1000, description: 'Цвет радуги'},
 ]
 
-const getTotalPrice = (items:IProduct[]) => {
+const getTotalPrice = (items: IProduct[]) => {
     return items.reduce((acc, item) => {
         return acc += item.price
     }, 0)
@@ -29,21 +30,20 @@ const ProductList = () => {
     const [isSend, setIsSend] = useState(false);
     const {tg, queryId} = useTelegram();
 
-    const onSendData = useCallback( ()  => {
+    const onSendData = useCallback(() => {
         const data = {
             products: addedItems,
             totalPrice: getTotalPrice(addedItems),
             queryId: queryId,
         };
 
-        fetch('http://185.237.253.173:8000/basket', {
-             method: 'POST',
-             headers: {
-                 'Accept': 'application/json',
-                 'Content-Type': 'application/json'
-             },
-             body: JSON.stringify(data)
-        }).then();
+        axios.post('http://185.237.253.173:8000/basket', {data})
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
         setIsSend(true);
     }, [addedItems]);
@@ -55,8 +55,8 @@ const ProductList = () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
     }, [onSendData])
-    
-    const onAdd = (product:IProduct) => {
+
+    const onAdd = (product: IProduct) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
         let newItems = [];
 
@@ -78,7 +78,7 @@ const ProductList = () => {
         setAddedItems(newItems);
     }
 
-    
+
     return (
         <div className={'list'}>
             <h1>STATUS SEND: {isSend ? "ДА" : "НЕТ"}</h1>
