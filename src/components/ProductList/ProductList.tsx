@@ -98,7 +98,7 @@ const ProductList = () => {
         });
 
         console.log("ЗАПРОС ЗАКОНЧИЛ ВЫПОЛНЕНИЕ");
-        return response.json();
+        return console.log(response.json());
     };
 
 
