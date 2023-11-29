@@ -30,10 +30,14 @@ const ProductList = () => {
     const {tg, queryId} = useTelegram();
 
     useEffect(() => {
-        axios
-            .post(`http://185.237.253.173:8000/test`, {
+        axios.post(`http://185.237.253.173:8000/test`, {
                 text: "test on hook"
             })
+            .then((response) => {
+                console.log(response.data);
+            });
+
+        axios.get('http://185.237.253.173:8000/basket')
             .then((response) => {
                 console.log(response.data);
             });
@@ -105,7 +109,7 @@ const ProductList = () => {
 
     return (
         <div className={'list'}>
-            <button onClick={() => sendPostData("test work")}>send test hook</button>
+            <button onClick={() => sendPostData("test work")}>send test get and post</button>
             {
                 products.map(item => (
                     <ProductItem
