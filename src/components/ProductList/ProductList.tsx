@@ -82,8 +82,23 @@ const ProductList = () => {
     }
 
 
+    const sendPostData = () => {
+        const data = {
+            text: "test success"
+        }
+        fetch('http://185.237.253.173:8000/test', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+    };
+
+
     return (
         <div className={'list'}>
+            <button onClick={sendPostData}>send test post</button>
             {
                 products.map(item => (
                     <ProductItem
