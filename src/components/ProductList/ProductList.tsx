@@ -84,7 +84,7 @@ const ProductList = () => {
 
     const sendPostData = async (text: string) => {
         axios
-            .post(`http://185.237.253.173:8000/test/`, {
+            .post(`http://185.237.253.173:8000/test`, {
                 text: text
             })
             .then((response) => {
@@ -95,7 +95,7 @@ const ProductList = () => {
 
     return (
         <div className={'list'}>
-            <button onClick={() => sendPostData("test work")}>send test new</button>
+            <button onClick={() => sendPostData("test work")}>send test http://185.237.253.173:8000/test</button>
             {
                 products.map(item => (
                     <ProductItem
