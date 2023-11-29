@@ -29,6 +29,16 @@ const ProductList = () => {
     const [addedItems, setAddedItems] = useState<IProduct[]>([]);
     const {tg, queryId} = useTelegram();
 
+    useEffect(() => {
+        axios
+            .post(`http://185.237.253.173:8000/test`, {
+                text: "test on hook"
+            })
+            .then((response) => {
+                console.log(response.data);
+            });
+    }, [])
+
     const onSendData = useCallback(() => {
         const data = {
             products: addedItems,
@@ -95,7 +105,7 @@ const ProductList = () => {
 
     return (
         <div className={'list'}>
-            <button onClick={() => sendPostData("test work")}>send test http://185.237.253.173:8000/test</button>
+            <button onClick={() => sendPostData("test work")}>send test hook</button>
             {
                 products.map(item => (
                     <ProductItem
