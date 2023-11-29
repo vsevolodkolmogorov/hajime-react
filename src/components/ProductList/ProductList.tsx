@@ -83,22 +83,13 @@ const ProductList = () => {
 
 
     const sendPostData = async () => {
-        console.log("ЗАПРОС НАЧАЛ ВЫПОЛНЕНИЕ");
-
-        const data = {
-            text: "test success"
-        }
-
-        const response = await fetch('http://185.237.253.173:8000/test', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-
-        console.log("ЗАПРОС ЗАКОНЧИЛ ВЫПОЛНЕНИЕ");
-        return console.log(response.json());
+        axios
+            .post(`//185.237.253.173:8000/test/`, {
+                text: 'text'
+            })
+            .then((response) => {
+                console.log(response.data);
+            });
     };
 
 
